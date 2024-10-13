@@ -44,7 +44,7 @@ function Footer() {
       <div className="flex justify-around mt-10 text-white">
         <div className='max-w-[20%]'>
           <h3 className="text-xl font-semibold mb-3 underline">About Us</h3>
-          <p>Silver Airport Taxis is the best silver taxi service in Sydney. We have an updated luxury fleet. Book your airport taxi 24/7 in Sydney. Book online or through calls.</p>
+          <p>Sydney Taxi Service is your premier choice for reliable and comfortable taxi service in Sydney. Our modern fleet of vehicles offers a luxurious and smooth ride for all your travel needs. Whether it's a quick trip across town or a ride to the airport, we're available 24/7. Book your Sydney taxi online or give us a call to experience convenient and top-notch service anytime..</p>
         </div>
 
         <div className='max-w-[30%]'>
