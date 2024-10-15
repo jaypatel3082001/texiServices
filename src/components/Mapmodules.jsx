@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Polyline,useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setTotalDistance,setTotalDuration } from '../reduxFiles/inputSlice';
 
 const DefaultIcon = L.icon({
   iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
@@ -26,8 +27,9 @@ function Mapmodules() {
   const [locations, setLocations] = useState([]); // To store markers like pickup and dropoff
   const [route, setRoute] = useState([]); // To store the route coordinates
   const inputs = useSelector((state) => state.input); // Retrieve pickup and dropoff points from the store
-  const [totalDistance, setTotalDistance] = useState("");
-const [totalDuration, setTotalDuration] = useState("");
+  const dispatch=useDispatch()
+  // const [totalDistance, setTotalDistance] = useState("");
+// const [totalDuration, setTotalDuration] = useState("");
 
   useEffect(() => {
     // If pickup and dropoff points exist, call the handelRoute function to fetch the route data
@@ -57,16 +59,19 @@ const [totalDuration, setTotalDuration] = useState("");
         const steps = data.routes[0].legs[0].steps;
         const distance = data.routes[0].legs[0].readable_distance;
         const duration = data.routes[0].legs[0].readable_duration;
-  
-        setTotalDistance(distance);
-        setTotalDuration(duration);
-  
+
+        // setTotalDistance(distance);
+
+        // setTotalDuration(duration);
+        dispatch(setTotalDistance(distance))
+        dispatch(setTotalDuration(duration))
+
         // Extract all steps for the route polyline
         const routeCoordinates = steps.map((step) => [
           [step.start_location.lat, step.start_location.lng],
           [step.end_location.lat, step.end_location.lng],
         ]).flat(); // Flatten the array to use it as a single polyline
-  
+
         setRoute(routeCoordinates); // Save the route coordinates
         setMapCenter([startcord.lat, startcord.lng]); // Center map on pickup point
         setLocations([pickUp, dropOff]); // Set pickup and dropoe pickup and dropoff markers
@@ -77,8 +82,8 @@ const [totalDuration, setTotalDuration] = useState("");
   };
 console.log("locationslocations",locations)
 console.log("route route..",route)
-console.log("totalDistance",totalDistance)
-console.log("totalDuration totalDuration..",totalDuration)
+// console.log("totalDistance",totalDistance)
+// console.log("totalDuration totalDuration..",totalDuration)
   return (
     <div className="w-full h-screen z-10">
      <MapContainer

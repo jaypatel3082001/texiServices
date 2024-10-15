@@ -14,7 +14,10 @@ const initialState = {
     lat:null,
     lng:null
   },
-  routeState:false
+  routeState:false,
+  totalDistance:null,
+  totalDuration:null,
+
 };
 
 const inputSlice = createSlice({
@@ -36,9 +39,15 @@ const inputSlice = createSlice({
     setRouteState: (state,action) => {
       state.routeState = action.payload
     },
+    setTotalDistance: (state,action) => {
+      state.totalDistance = action.payload
+    },
+    setTotalDuration: (state,action) => {
+      state.totalDuration = action.payload
+    },
 
   },
 });
 
-export const { setCurrentUser,setUserCenter,setPickUp,setDropup,setRouteState } = inputSlice.actions;
+export const { setCurrentUser,setUserCenter,setPickUp,setDropup,setRouteState,setTotalDistance, setTotalDuration} = inputSlice.actions;
 export default inputSlice.reducer;
