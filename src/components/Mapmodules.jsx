@@ -26,6 +26,8 @@ function Mapmodules() {
   const [locations, setLocations] = useState([]); // To store markers like pickup and dropoff
   const [route, setRoute] = useState([]); // To store the route coordinates
   const inputs = useSelector((state) => state.input); // Retrieve pickup and dropoff points from the store
+  const [totalDistance, setTotalDistance] = useState("");
+const [totalDuration, setTotalDuration] = useState("");
 
   useEffect(() => {
     // If pickup and dropoff points exist, call the handelRoute function to fetch the route data
@@ -35,8 +37,10 @@ function Mapmodules() {
   }, [inputs.pickUp, inputs.dropUp]);
 
   const handelRoute = async (pickUp, dropOff) => {
-    const apikey = import.meta.env.REACT_APP_MAPS_API_KEY;
-    const url = `https://api.olamaps.io/routing/v1/directions?origin=${pickUp?.lat},${pickUp?.lng}&destination=${dropOff?.lat},${dropOff?.lng}&api_key=${apikey}`;
+    const apikey = import.meta.env.VITE_MAPS_API_KEY;
+
+    // console.log("apikey",apikey)
+    const url = `https://api.olamaps.io/routing/v1/routeOptimizer?locations=${pickUp?.lat},${pickUp?.lng}|${dropOff?.lat},${dropOff?.lng}&source=first&destination=last&mode=driving&steps=true&api_key=${apikey}`;
 
     try {
       const response = await fetch(url, {
@@ -48,13 +52,24 @@ function Mapmodules() {
 
       // Assuming data.routes[0].geometry.coordinates contains the  polyline coordinates
       if (data && data.routes) {
-        const startcord = data.routes[0].legs[0].start_location
-        const endcord = data.routes[0].legs[0].end_location
-        console.log(startcord,"startcord")
-        console.log(endcord,"endcord")
-        setRoute([[startcord.lat,startcord.lng],[endcord.lat,endcord.lng]]); // Save the route coordinates
-        setMapCenter([startcord.lat, startcord.lng]); // Optionally center the map on the pickup point
-        setLocations([pickUp, dropOff]); // Optionally set the pickup and dropoff markers
+        const startcord = data.routes[0].legs[0].start_location;
+        const endcord = data.routes[0].legs[0].end_location;
+        const steps = data.routes[0].legs[0].steps;
+        const distance = data.routes[0].legs[0].readable_distance;
+        const duration = data.routes[0].legs[0].readable_duration;
+  
+        setTotalDistance(distance);
+        setTotalDuration(duration);
+  
+        // Extract all steps for the route polyline
+        const routeCoordinates = steps.map((step) => [
+          [step.start_location.lat, step.start_location.lng],
+          [step.end_location.lat, step.end_location.lng],
+        ]).flat(); // Flatten the array to use it as a single polyline
+  
+        setRoute(routeCoordinates); // Save the route coordinates
+        setMapCenter([startcord.lat, startcord.lng]); // Center map on pickup point
+        setLocations([pickUp, dropOff]); // Set pickup and dropoe pickup and dropoff markers
       }
     } catch (error) {
       console.error("Error fetching route data:", error);
@@ -62,39 +77,32 @@ function Mapmodules() {
   };
 console.log("locationslocations",locations)
 console.log("route route..",route)
+console.log("totalDistance",totalDistance)
+console.log("totalDuration totalDuration..",totalDuration)
   return (
     <div className="w-full h-screen z-10">
-      <MapContainer
-        center={mapCenter}
-        zoom={13}
-        style={{
-          height: "100%",
-          width: "100%",
-          position: "relative", // Make sure the position is set
-          zIndex: 0, // Set the desired z-index
-        }}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-
-
-<ChangeMapView center={mapCenter} />
-        {/* Add Markers for pickup and dropoff locations */}
-        {locations.map((location, index) => (
-          <Marker
-            key={index}
-            position={[location.lat, location.lng]}
-            icon={DefaultIcon}
-          >
-            <Popup>{index === 0 ? "Pickup" : "Dropoff"}</Popup>
-          </Marker>
-        ))}
-
-        {/* Draw the route using Polyline */}
-        {route.length > 0 && <Polyline positions={route} color="blue" />}
-      </MapContainer>
+     <MapContainer
+    center={mapCenter}
+    zoom={13}
+    style={{
+      height: "100%",
+      width: "100%",
+      position: "relative",
+      zIndex: 0,
+    }}
+  >
+    <TileLayer
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    />
+    <ChangeMapView center={mapCenter} />
+    {locations.map((location, index) => (
+      <Marker key={index} position={[location.lat, location.lng]} icon={DefaultIcon}>
+        <Popup>{index === 0 ? "Pickup" : "Dropoff"}</Popup>
+      </Marker>
+    ))}
+    {route.length > 0 && <Polyline positions={route} />}
+  </MapContainer>
     </div>
   );
 }

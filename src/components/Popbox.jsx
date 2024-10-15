@@ -44,7 +44,7 @@ function Popbox() {
     };
 
     const handleAutocompleteFetch = async (input, type) => {
-        const apiKey = import.meta.env.REACT_APP_MAPS_API_KEY; // Replace with your actual API key
+        const apiKey = import.meta.env.VITE_MAPS_API_KEY; // Replace with your actual API key
         const url = `https://api.olamaps.io/places/v1/autocomplete?input=${input}&api_key=${apiKey}`;
 
         try {
