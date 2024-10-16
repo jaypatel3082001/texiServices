@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserCenter, setCurrentUser, setDropup, setPickUp } from '../reduxFiles/inputSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Popbox() {
     const dispatch = useDispatch();
     const inputs = useSelector((state) => state.input);
+    const navigate=useNavigate()
     const [autocompletePickup, setAutocompletePickup] = useState([]);
     const [autocompleteDropoff, setAutocompleteDropoff] = useState([]);
     const [autocompletebox, setAutocompleteBox] = useState(false);
     const [pickupInput, setPickupInput] = useState('');
+    const [Isloding, setIsloding] = useState(false);
     const [dropoffInput, setDropoffInput] = useState('');
     const [totalDuration, setTotalDuration] = useState(inputs?.totalDuration);
     const [totalDistance, setTotalDistance] = useState(inputs?.totalDistance);
@@ -101,18 +104,52 @@ function Popbox() {
     console.log("pickupInput", pickupInput)
 
     const handleSubmit = async () => {
+        setIsloding(true)
         const data={
             name:name,
             contactNum:contactNum,
             disabledAccess:disabledAccess,
             childAvailability:childAvailability,
             paymentMode:paymentMode,
+            source:dropoffInput,
+            destination:pickupInput,
+            totalDistance:totalDistance
         }
-        console.log(data,"data")
+        console.log(data, "data");
+        const apiUrl=import.meta.env.VITE_BACKEND_LINK
+
+        try {
+            const response = await fetch(`${apiUrl}/user/email`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+        
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+        
+            const responseData = await response.json();
+            console.log(responseData);
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }finally{
+            navigate(0)
+            setIsloding(false)
+        }
+        
 
     }
 
     return (
+        Isloding ? (
+          <div className="absolute w-full h-screen top-0 flex justify-center items-center bg-white z-30">
+            {/* You can customize your loading spinner here */}
+          <div className='text-xl font-bold'>Loading...</div>
+          </div>
+        ) : (
         <div className='w-full h-screen absolute top-0 flex'>
             <div className='w-full flex justify-start items-start mt-0'>
                 <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-4 w-[350px] h-screen max-w-[350px]:">
@@ -268,7 +305,21 @@ function Popbox() {
                 </div>
             </div>
         </div>
-    );
+          
+        
+       
+    )
+    )
+    // return (
+    //     {Isloading ? (
+    //       <div className="spinner">
+    //         {/* You can customize your loading spinner here */}
+    //         Loading...
+    //       </div>
+    //     ) : (
+           
+    //     )}
+    //   );
 }
 
 export default Popbox;
