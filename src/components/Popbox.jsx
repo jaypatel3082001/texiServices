@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserCenter, setCurrentUser, setDropup, setPickUp } from '../reduxFiles/inputSlice';
-import { useNavigate } from 'react-router-dom';
+import { setDropup, setPickUp } from '../reduxFiles/inputSlice';
+// import { useNavigate } from 'react-router-dom';
 
 function Popbox() {
     const dispatch = useDispatch();
     const inputs = useSelector((state) => state.input);
-    const navigate=useNavigate()
+    // const navigate=useNavigate()
     const [autocompletePickup, setAutocompletePickup] = useState([]);
     const [autocompleteDropoff, setAutocompleteDropoff] = useState([]);
     const [autocompletebox, setAutocompleteBox] = useState(false);
@@ -136,7 +136,7 @@ function Popbox() {
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
         }finally{
-            navigate(0)
+            // navigate(0)
             setIsloding(false)
         }
         
