@@ -1,6 +1,7 @@
 import React from 'react'
 import Popbox from './Popbox'
 import Mapmodules from './Mapmodules'
+import UserCount from './UserCount'
 // import { useJsApiLoader } from '@react-google-maps/api'
 
 function Contents() {
@@ -12,6 +13,7 @@ function Contents() {
     <div className='relative'>
 <Popbox />
 <Mapmodules />
+<UserCount />
     </div>
   )
 }
