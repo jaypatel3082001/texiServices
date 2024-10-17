@@ -19,6 +19,7 @@ function Popbox() {
     const [contactNum, setContactNum] = useState('');
     const [disabledAccess, setDisabledAccess] = useState(false);
     const [childAvailability, setChildAvailability] = useState(false);
+    const [passengerCount, setPassengerCount] = useState('');
 
     // State for radio buttons (Payment Mode)
     const [paymentMode, setPaymentMode] = useState('');
@@ -113,7 +114,8 @@ function Popbox() {
             paymentMode:paymentMode,
             source:dropoffInput,
             destination:pickupInput,
-            totalDistance:totalDistance
+            totalDistance:totalDistance,
+            passengerCount:passengerCount,
         }
         console.log(data, "data");
         const apiUrl=import.meta.env.VITE_BACKEND_LINK
@@ -235,6 +237,16 @@ function Popbox() {
                         )}
 
                         <div className="space-y-4">
+                        <div className="flex flex-col">
+                            <label htmlFor="paaasengerCount" className="text-gray-700 font-medium">Number of Passenger</label>
+                            <input
+                                type="text"
+                                name="paaasengerCount"
+                                value={passengerCount}
+                                className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+                                onChange={(e) => setPassengerCount(e.target.value)}
+                            />
+                        </div>
                 {/* Special Options */}
                 <div className="flex flex-col">
                     <label htmlFor="specialOption" className="text-gray-700 font-medium">Special Options</label>
@@ -247,7 +259,7 @@ function Popbox() {
                                 onChange={(e) => setDisabledAccess(e.target.checked)}
                                 className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                             />
-                            <label className="ml-2 text-gray-700">Disabled Access</label>
+                            <label className="ml-2 text-gray-700">Disabled</label>
                         </div>
                         <div className="flex items-center">
                             <input
@@ -257,7 +269,7 @@ function Popbox() {
                                 onChange={(e) => setChildAvailability(e.target.checked)}
                                 className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                             />
-                            <label className="ml-2 text-gray-700">Child Availability</label>
+                            <label className="ml-2 text-gray-700">Child seat</label>
                         </div>
                     </div>
                 </div>
@@ -287,6 +299,17 @@ function Popbox() {
                                 className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                             />
                             <label className="ml-2 text-gray-700">Card</label>
+                        </div>
+                        <div className="flex items-center">
+                            <input
+                                type="radio"
+                                name="paymentMode"
+                                value="Cab Charge"
+                                checked={paymentMode === 'Cab Charge'}
+                                onChange={(e) => setPaymentMode(e.target.value)}
+                                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                            />
+                            <label className="ml-2 text-gray-700">Cab Charge</label>
                         </div>
                     </div>
                 </div>
