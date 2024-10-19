@@ -26,6 +26,7 @@ function ChangeMapView({ center }) {
 function Mapmodules() {
   const [mapCenter, setMapCenter] = useState([-33.868820, 151.209290]); // Default center (Sydney)
   const [locations, setLocations] = useState([]);
+  const [validDistance, setValidDistance] = useState(null);
   const [route, setRoute] = useState([]); // Holds the main route polyline
   const [stepPolylines, setStepPolylines] = useState([]); // Holds step-by-step polylines
   const inputs = useSelector((state) => state.input);
@@ -79,6 +80,7 @@ function Mapmodules() {
         const duration = route.legs[0].duration; // in seconds
 
         // Dispatch actions to update Redux state
+        setValidDistance(distance/1000)
         dispatch(setTotalDistance(distance / 1000)); // in kilometers
         dispatch(setTotalDuration(duration/60)); // in seconds
 
@@ -99,7 +101,15 @@ function Mapmodules() {
     }
   };
 
-  return (
+  return (validDistance >100 ? (
+    <div className=" w-full h-screen flex justify-center items-center">
+    <div className="text-6xl font-bold text-black bg-white">
+      Invalid Locations! Please Enter Valid Location
+    </div>
+
+
+    </div>
+  ) :(
     <div className="w-full h-screen z-10">
       <MapContainer
         center={mapCenter}
@@ -130,7 +140,7 @@ function Mapmodules() {
         ))}
       </MapContainer>
     </div>
-  );
+  ))
 }
 
 export default Mapmodules;
