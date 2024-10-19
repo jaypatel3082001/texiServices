@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 function UserCount() {
-    const [userCount,setUserCount]=useState(null)  
+    const [userCount,setUserCount]=useState(null)
       useEffect(()=>{
         handelUserCount()
     },[])
@@ -9,30 +9,30 @@ function UserCount() {
       try {
         let apiUrl = `${import.meta.env.VITE_BACKEND_LINK}/user/count`;
         const revisedIp = localStorage.getItem('revisedIp');
-        
+
         if (revisedIp) {
           apiUrl += `?revisedIp=${revisedIp}`;
         }
-    
+
         const response = await fetch(apiUrl);
-    
-    
+
+
         const responseData = await response.json();
         const newRevisedIp = responseData?.data?.userIp;
-        
+
         if (newRevisedIp) {
           console.log("sfdgsdgdfs",newRevisedIp)
           localStorage.setItem('revisedIp', newRevisedIp);
         }
-        
+
         console.log(responseData.data);
         setUserCount(responseData.data.userCount);
-        
+
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
       }
     };
-    
+
   return (
     <div className="relative bg-[#FFC107] text-white">
         <div className="checkered-stripe h-6 w-full"></div>
@@ -53,7 +53,7 @@ function UserCount() {
     <div className="checkered-stripe h-6 w-full"></div>
 
     {/* Bottom Wave */}
-  
+
   </div>
   )
 }

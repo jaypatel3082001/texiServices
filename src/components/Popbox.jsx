@@ -32,28 +32,27 @@ function Popbox() {
     }, [inputs?.totalDuration, inputs?.totalDistance])
 
     const handlePlaceChanged = (type, place) => {
-        console.log("first", place.geometry)
+        console.log("first", place)
 
-        if (place && place.geometry) {
+        if (place && place) {
             const location = {
-                lat: place?.geometry?.location?.lat,
-                lng: place?.geometry?.location?.lng,
+                lat: place?.lat,
+                lng: place?.lon,
             };
             console.log("type", type)
 
             if (type === 'pickup') {
-                setPickupInput(place.description)
-                setAutocompletePickup(place.predictions || []);
-                console.log(location, "locationlocation")
+                setPickupInput(place.display_name);
+                setAutocompletePickup([]);  // Clear the list after selection
                 dispatch(setPickUp(location));
-                setAutocompleteBox(false)
-                // setAutocompleteBox(false)
+                setAutocompleteBox(false);
             } else if (type === 'dropoff') {
-                setDropoffInput(place.description)
-                setAutocompleteDropoff(place.predictions || []);
+                setDropoffInput(place.display_name);
+                setAutocompleteDropoff([]);  // Clear the list after selection
                 dispatch(setDropup(location));
-                setAutocompleteBox(false)
+                setAutocompleteBox(false);
             }
+
 
 
             // Dispatch the location to update the map
@@ -65,8 +64,9 @@ function Popbox() {
     };
 
     const handleAutocompleteFetch = async (input, type) => {
-        const apiKey = import.meta.env.VITE_MAPS_API_KEY; // Replace with your actual API key
-        const url = `https://api.olamaps.io/places/v1/autocomplete?input=${input}&api_key=${apiKey}`;
+        const apiKey = import.meta.env.VITE_AUTOCOMPLETE_API_KEY; // Replace with your actual API key
+        // const url = `https://api.olamaps.io/places/v1/autocomplete?input=${input}&api_key=${apiKey}`;
+        const url = `https://us1.locationiq.com/v1/autocomplete.php?key=${apiKey}&q=${input}&limit=10&countrycodes=au`;
 
         try {
             const response = await fetch(url, {
@@ -77,9 +77,9 @@ function Popbox() {
             console.log("data:", data);
 
             if (type === 'pickup') {
-                setAutocompletePickup(data.predictions || []);
+                setAutocompletePickup(data || []);
             } else if (type === 'dropoff') {
-                setAutocompleteDropoff(data.predictions || []);
+                setAutocompleteDropoff(data || []);
             }
 
         } catch (error) {
@@ -128,11 +128,11 @@ function Popbox() {
                 },
                 body: JSON.stringify(data)
             });
-        
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-        
+
             const responseData = await response.json();
             console.log(responseData);
         } catch (error) {
@@ -141,20 +141,20 @@ function Popbox() {
             // navigate(0)
             setIsloding(false)
         }
-        
+
 
     }
 
     return (
         Isloding ? (
-          <div className="absolute w-full h-screen top-0 flex justify-center items-center bg-white z-30">
+          <div className="absolute w-full h-auto top-0 flex justify-center items-center bg-white z-30">
             {/* You can customize your loading spinner here */}
           <div className='text-xl font-bold'>Loading...</div>
           </div>
         ) : (
         <div className='w-full h-screen absolute top-0 flex'>
             <div className='w-full flex justify-start items-start mt-0'>
-                <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-4 w-[350px] h-screen max-w-[350px]:">
+                <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-3 w-[350px] h-screen max-w-[350px]:">
                     <div className="space-y-4">
                         <div className="flex flex-col">
                             <label htmlFor="name" className="text-gray-700 font-medium">Name</label>
@@ -196,7 +196,7 @@ function Popbox() {
                                             className="p-2 hover:bg-gray-200 cursor-pointer"
                                             onClick={() => handlePlaceChanged('pickup', suggestion)}
                                         >
-                                            {suggestion.description}
+                                            {suggestion.display_name}
                                         </li>
                                     ))}
                                 </ul>
@@ -215,13 +215,13 @@ function Popbox() {
                             {/* Render autocomplete suggestions */}
                             {autocompleteDropoff.length > 0 && (
                                 <ul className="border border-gray-300 rounded-md mt-1 max-h-40 overflow-auto">
-                                    {autocompleteDropoff.map((suggestion, index) => (
+                                    {autocompleteDropoff?.map((suggestion, index) => (
                                         <li
                                             key={index}
                                             className="p-2 hover:bg-gray-200 cursor-pointer"
                                             onClick={() => handlePlaceChanged('dropoff', suggestion)}
                                         >
-                                            {suggestion.description}
+                                            {suggestion.display_name}
                                         </li>
                                     ))}
                                 </ul>
@@ -231,7 +231,7 @@ function Popbox() {
                         {totalDistance && totalDuration && (<div className="space-y-4">
                             <div className="flex flex-col">
                                 <div>Distance : {totalDistance} Km</div>
-                                <div>Approximately Time : {totalDuration}</div>
+                                <div>Approximately Time : {totalDuration} Min</div>
                             </div>
                         </div>
                         )}
@@ -250,7 +250,7 @@ function Popbox() {
                 {/* Special Options */}
                 <div className="flex flex-col">
                     <label htmlFor="specialOption" className="text-gray-700 font-medium">Special Options</label>
-                    <div className="flex flex-col space-y-2 mt-1">
+                    <div className="flex mt-1">
                         <div className="flex items-center">
                             <input
                                 type="checkbox"
@@ -261,7 +261,7 @@ function Popbox() {
                             />
                             <label className="ml-2 text-gray-700">Disabled</label>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center ml-4">
                             <input
                                 type="checkbox"
                                 name="childAvailability"
@@ -277,7 +277,7 @@ function Popbox() {
                 {/* Payment Mode */}
                 <div className="flex flex-col">
                     <label htmlFor="paymentMode" className="text-gray-700 font-medium">Payment Mode</label>
-                    <div className="flex flex-col space-y-2 mt-1">
+                    <div className="flex space-y-0 mt-1 items-center">
                         <div className="flex items-center">
                             <input
                                 type="radio"
@@ -289,7 +289,7 @@ function Popbox() {
                             />
                             <label className="ml-2 text-gray-700">Cash</label>
                         </div>
-                        <div className="flex items-center">
+                        <div className="flex items-center mx-3">
                             <input
                                 type="radio"
                                 name="paymentMode"
@@ -328,9 +328,9 @@ function Popbox() {
                 </div>
             </div>
         </div>
-          
-        
-       
+
+
+
     )
     )
     // return (
@@ -340,7 +340,7 @@ function Popbox() {
     //         Loading...
     //       </div>
     //     ) : (
-           
+
     //     )}
     //   );
 }

@@ -10,7 +10,7 @@ function Contents() {
 //   return <div>loding...</div>
 // }
   return (
-    <div className='relative'>
+    <div className='relative min-h-screen'>
 <Popbox />
 <Mapmodules />
 <UserCount />
