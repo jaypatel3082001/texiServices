@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDropup, setPickUp } from '../reduxFiles/inputSlice';
 // import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Popbox() {
     const dispatch = useDispatch();
@@ -105,28 +108,29 @@ function Popbox() {
     console.log("pickupInput", pickupInput)
 
     const handleSubmit = async () => {
-        setIsloding(true)
-        const data={
-            name:name,
-            contactNum:contactNum,
-            disabledAccess:disabledAccess,
-            childAvailability:childAvailability,
-            paymentMode:paymentMode,
-            source:dropoffInput,
-            destination:pickupInput,
-            totalDistance:totalDistance,
-            passengerCount:passengerCount,
-        }
+        setIsloding(true);
+        const data = {
+            name: name,
+            contactNum: contactNum,
+            disabledAccess: disabledAccess,
+            childAvailability: childAvailability,
+            paymentMode: paymentMode,
+            source: dropoffInput,
+            destination: pickupInput,
+            totalDistance: totalDistance,
+            passengerCount: passengerCount,
+        };
+
         console.log(data, "data");
-        const apiUrl=import.meta.env.VITE_BACKEND_LINK
+        const apiUrl = import.meta.env.VITE_BACKEND_LINK;
 
         try {
             const response = await fetch(`${apiUrl}/user/email`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
 
             if (!response.ok) {
@@ -135,24 +139,30 @@ function Popbox() {
 
             const responseData = await response.json();
             console.log(responseData);
+
+            // Show success toast
+            toast.success("Form submitted successfully!");
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
-        }finally{
-            // navigate(0)
-            setIsloding(false)
+
+            // Show error toast
+            toast.error("There was an error submitting the form.");
+        } finally {
+            setIsloding(false);
         }
+    };
 
-
-    }
 
     return (
         Isloding ? (
-          <div className="absolute w-full h-auto top-0 flex justify-center items-center bg-white z-30">
+          <div className="absolute w-full h-screen top-0 flex justify-center items-center bg-white z-30">
             {/* You can customize your loading spinner here */}
           <div className='text-xl font-bold'>Loading...</div>
+
           </div>
         ) : (
         <div className='w-full md:h-screen md:absolute mad:top-0 flex'>
+          {/* <ToastContainer /> */}
             <div className='w-full flex md:justify-start md:items-start max-md:justify-center mt-0 max-md:bg-[#E2E4E8] max-md:py-10'>
                 <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-3 w-[350px] h-screen max-w-[350px]:">
                     <div className="space-y-4">

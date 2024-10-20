@@ -70,9 +70,9 @@ function Footer() {
 
             <div className='max-w-[30%] max-[450px]:hidden'>
               <h3 className="text-xl font-semibold mb-3 underline">Contact Us</h3>
-              <p>New South Wales, Australia</p>
-              <p>Email: <a href="mailto:info@silverairporttaxis.com.au" className="hover:text-[#89bc21] break-words">info@silverairporttaxis.com.au</a></p>
-              <p>Phone: <a href="tel:1300912141" className="hover:text-[#89bc21]">1300 912 141</a></p>
+              <p>Sydney, Australia</p>
+              <p>Email: <a href="mailto:booktaxi2312@gmail.com" className="hover:text-[#89bc21] break-words">booktaxi2312@gmail.com</a></p>
+              <p>Phone: <a href="tel:1300912141" className="hover:text-[#89bc21]">0479 121 833</a></p>
               <p>Available 24/7 365 Days</p>
             </div>
           </div>
