@@ -28,7 +28,7 @@ function Services() {
       <div className='bg-gradient-to-b from-gray-300 to-gray-200 py-12'>
 
         <div className='flex justify-center'>
-          <div className='min-w-[1312px] p-6 bg-white shadow-xl rounded-lg'>
+          <div className='xl:min-w-[1312px] max-xl:w-full max-xl:px-4 p-6 bg-white shadow-xl rounded-lg'>
 
             {/* Mission Section */}
             <div className="bg-gray-50 py-12">

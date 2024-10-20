@@ -13,22 +13,22 @@ function AboutUs() {
     <div className='max-w-[1312px] p-6 bg-white shadow-xl rounded-lg'>
 
       {/* Mission Section */}
-      <div className='flex justify-between items-center mb-10'>
+      <div className='flex justify-between items-center mb-10 max-md:flex-col'>
         <div className='basis-[48%]'>
           <h3 className='text-blue-500 text-3xl font-semibold mb-4'>Our Mission</h3>
           <p className='text-gray-700 text-lg leading-relaxed'>
           At Sydney Taxi Service, our mission is to provide top-tier, reliable, and comfortable travel solutions that cater to your unique needs. Whether it's a business trip, a ride to the airport, or exploring the city, we prioritize your convenience and comfort. With our modern fleet and professional drivers, we ensure that every journey is smooth and stress-free. Booking a taxi is quick and easy with our user-friendly online system.
           </p>
         </div>
-        <div className='basis-[48%]'>
-          <img className='w-full h-auto rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300' src='/our-mission.jpg' alt='Our Mission' />
+        <div className='basis-[100%] md:basis-[48%] max-md:mt-10'>
+          <img className='w-full h-auto max-[768px]:h-[329px] max-[425px]:h-[250px] rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300' src='/our-mission.jpg' alt='Our Mission' />
         </div>
       </div>
 
       {/* Commitment Section */}
-      <div className='flex justify-between items-center mb-10'>
-        <div className='basis-[48%]'>
-          <img className='w-full h-auto rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300' src='/our-commitment.jpg' alt='Our Commitment' />
+      <div className='flex justify-between items-center mb-10 max-md:flex-col-reverse'>
+        <div className='basis-[100%] md:basis-[48%] max-md:mt-10'>
+          <img className='w-full h-auto max-[768px]:h-[329px] max-[425px]:h-[250px] rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300' src='/our-commitment.jpg' alt='Our Commitment' />
         </div>
         <div className='basis-[48%]'>
           <h3 className='text-blue-500 text-3xl font-semibold mb-4'>Our Commitment</h3>
@@ -39,15 +39,16 @@ function AboutUs() {
       </div>
 
       {/* Vision Section */}
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center max-md:flex-col'>
         <div className='basis-[48%]'>
           <h3 className='text-blue-500 text-3xl font-semibold mb-4'>Our Vision</h3>
           <p className='text-gray-700 text-lg leading-relaxed'>
           We are committed to becoming the leading taxi service in Sydney by maintaining the highest safety standards and ensuring all vehicles are equipped with cutting-edge technology. Our vision is to offer every passenger a seamless and enjoyable travel experience, guaranteeing peace of mind on every ride.
           </p>
         </div>
-        <div className='basis-[48%]'>
-          <img className='w-full h-auto rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300' src='/our-vision.jpg' alt='Our Vision' />
+        <div className='basis-[100%] md:basis-[48%] max-md:mt-10'>
+          <img className='w-full h-auto max-[768px]:h-[329px] max-[425px]:h-[250px]
+           rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300' src='/our-vision.jpg' alt='Our Vision' />
         </div>
       </div>
 

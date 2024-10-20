@@ -110,7 +110,7 @@ function Mapmodules() {
 
     </div>
   ) :(
-    <div className="w-full h-screen z-10">
+    <div className="w-full h-screen z-10 max-md:px-4">
       <MapContainer
         center={mapCenter}
         zoom={13}

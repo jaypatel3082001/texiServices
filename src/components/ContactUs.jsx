@@ -37,24 +37,12 @@ function ContactUs() {
 
     {/* Content */}
     <div className="flex justify-center bg-gradient-to-b from-gray-300 to-gray-200 py-12">
-      <div className="min-w-[1312px] mx-auto flex flex-wrap lg:flex-nowrap items-center gap-8 p-6 bg-white shadow-lg rounded-lg">
+      <div className="xl:min-w-[1312px] max-xl:w-full max-xl:px-4 mx-auto flex flex-wrap lg:flex-nowrap items-center gap-8 p-6 bg-white shadow-lg rounded-lg">
         {/* Left Side: Find Us (Map) */}
         <div className="w-full lg:w-2/3">
           <h2 className="text-3xl font-semibold text-gray-700 mb-6">Find Us</h2>
           <div className="h-[500px] w-full rounded-lg overflow-hidden shadow-md">
-            {/* <GoogleMap
-              center={mapCenter}
-              zoom={14}
-              mapContainerStyle={{ width: "100%", height: "100%" }}
-              options={{
-                zoomControl: false,
-                streetView: false,
-                mapTypeControl: false,
-                fullscreenControl: false,
-              }}
-            >
-              <Marker position={mapCenter} />
-            </GoogleMap> */}
+
             <MapContainer
   center={mapCenter}
   zoom={13}

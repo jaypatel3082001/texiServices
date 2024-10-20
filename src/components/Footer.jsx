@@ -8,8 +8,8 @@ function Footer() {
 
 
   return (
-  <footer className="bg-custom-dark text-[#FFC107] xl:py-10 flex justify-center max-[768px]:pt-8 max-[700px]:pb-0">
-  <div className="flex xl:max-w-[1312px] max-xl:w-full max-xl:px-10 max-[600px]:px-4 justify-center">
+  <footer className="bg-custom-dark text-[#FFC107] xl:py-10 flex justify-center max-[768px]:pt-8">
+  <div className="flex xl:max-w-[1312px] max-xl:w-full max-xl:px-10 max-[600px]:px-4 justify-center max-md:pb-8">
     <div className="w-full mt-7 font-inter max-[700px]:flex max-[700px]:flex-col-reverse max-[700px]:mt-0">
     <div className='flex justify-center w-full max-[700px]:mt-10'>
 

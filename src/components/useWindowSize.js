@@ -14,8 +14,12 @@ const useWindowSize = () => {
       });
     };
 
+    // Add event listener on mount
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', handleResize);
+
+      // Trigger the initial resize to set the size
+      handleResize();
 
       // Cleanup event listener on component unmount
       return () => window.removeEventListener('resize', handleResize);
