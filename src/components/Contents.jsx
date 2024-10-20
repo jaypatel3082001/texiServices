@@ -16,8 +16,10 @@ function Contents() {
 // }
   return (
     <div className='relative min-h-screen max-md:h-auto'>
+    {/* <div className='mt-5'> */}
+
  <ToastContainer
-    position="top-right"
+     position="top-center"
     autoClose={3000}
     hideProgressBar={false}
     newestOnTop={false}
@@ -26,7 +28,9 @@ function Contents() {
     pauseOnFocusLoss
     draggable
     pauseOnHover
+    containerStyle={{ marginTop: '50px' }}
 />
+    {/* </div> */}
 
 <Popbox />
 <Mapmodules />

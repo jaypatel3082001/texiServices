@@ -4,12 +4,13 @@ import { setDropup, setPickUp } from '../reduxFiles/inputSlice';
 // import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function Popbox() {
     const dispatch = useDispatch();
     const inputs = useSelector((state) => state.input);
-    // const navigate=useNavigate()
+    const navigate=useNavigate()
     const [autocompletePickup, setAutocompletePickup] = useState([]);
     const [autocompleteDropoff, setAutocompleteDropoff] = useState([]);
     const [autocompletebox, setAutocompleteBox] = useState(false);
@@ -107,7 +108,8 @@ function Popbox() {
     console.log("autocompletePickupautocompletePickupautocompletePickup", autocompletePickup)
     console.log("pickupInput", pickupInput)
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         setIsloding(true);
         const data = {
             name: name,
@@ -165,6 +167,7 @@ function Popbox() {
           {/* <ToastContainer /> */}
             <div className='w-full flex md:justify-start md:items-start max-md:justify-center mt-0 max-md:bg-[#E2E4E8] max-md:py-10'>
                 <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-3 w-[350px] h-screen max-w-[350px]:">
+                <form onSubmit={handleSubmit}>
                     <div className="space-y-4">
                         <div className="flex flex-col">
                             <label htmlFor="name" className="text-gray-700 font-medium">Name</label>
@@ -174,6 +177,7 @@ function Popbox() {
                                 value={name}
                                 className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
                                 onChange={(e) => setName(e.target.value)}
+                                required
                             />
                         </div>
 
@@ -185,6 +189,7 @@ function Popbox() {
                                 value={contactNum}
                                 className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
                                 onChange={(e) => setContactNum(e.target.value)}
+                                required
                             />
                         </div>
 
@@ -196,6 +201,7 @@ function Popbox() {
                                 value={pickupInput}
                                 className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
                                 onChange={handlePickupChange}
+                                required
                             />
                             {/* Render autocomplete suggestions */}
                             {autocompletePickup.length > 0 && autocompletebox === true && (
@@ -221,6 +227,7 @@ function Popbox() {
                                 value={dropoffInput}
                                 className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
                                 onChange={handleDropoffChange}
+                                required
                             />
                             {/* Render autocomplete suggestions */}
                             {autocompleteDropoff.length > 0 && (
@@ -255,6 +262,7 @@ function Popbox() {
                                 value={passengerCount}
                                 className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
                                 onChange={(e) => setPassengerCount(e.target.value)}
+                                required
                             />
                         </div>
                 {/* Special Options */}
@@ -326,15 +334,16 @@ function Popbox() {
 
                 {/* Submit Button */}
                 <div className="flex justify-start">
-                    <button
-                        className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition"
-                        onClick={handleSubmit}
-                    >
-                        Submit
-                    </button>
-                </div>
+                        <button
+                            type="submit" // Change button type to submit
+                            className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition"
+                        >
+                            Submit
+                        </button>
+                    </div>
             </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
