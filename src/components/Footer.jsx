@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import useWindowSize from './useWindowSize'
-import { BottomSvg, FacebookSvg, InstaSvg, LinkdinSvg, TweeterSvg } from './Svg';
+import {  FacebookSvg, InstaSvg, LinkdinSvg, TweeterSvg } from './Svg';
 import { Link } from 'react-router-dom';
 
 function Footer() {
-
-
-
   return (
     <footer className="bg-custom-dark text-[#FFC107] xl:py-10 flex justify-center max-[768px]:pt-8 max-[426px]:pt-0">
       <div className="flex xl:max-w-[1312px] max-xl:w-full max-xl:px-10 max-[600px]:px-4 justify-center max-md:pb-8">
@@ -21,10 +17,13 @@ function Footer() {
             Book Silver Taxi Online
           </button> */}
               </div>
-              <div className="max-[426px]:flex hidden justify-center items-center max-[426px]:pb-8">
+              <div className="max-[426px]:flex hidden justify-center items-center max-[426px]:pb-2">
                 <span className="pr-2 text-sm max-[400px]:text-[10px]">Privacy Policy</span>
                 <span className="border-l-2 border-r-2 border-gray-400 px-2 text-sm max-[400px]:text-[10px]">Terms & Conditions</span>
                 <span className="pl-2 flex text-sm max-[400px]:text-[10px]">Collection Statement</span>
+              </div>
+              <div className="max-[426px]:flex hidden justify-center items-center max-[426px]:pb-8">
+              <span className="flex text-sm max-[400px]:text-[10px]">Sydney Taxi Service © 2024</span>
               </div>
               {/* Social Media Icons */}
               <div className="flex max-[430px]:flex-wrap max-[430px]:justify-center space-x-3">
