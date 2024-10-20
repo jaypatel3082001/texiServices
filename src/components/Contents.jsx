@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Popbox from './Popbox'
 import Mapmodules from './Mapmodules'
 import UserCount from './UserCount'
+import { useSelector } from 'react-redux'
 // import { useJsApiLoader } from '@react-google-maps/api'
 
 function Contents() {
+  // const inputs=useSelector((state)=>state.input.userCount)
+
 
 // if (!isLoaded) {
 //   return <div>loding...</div>

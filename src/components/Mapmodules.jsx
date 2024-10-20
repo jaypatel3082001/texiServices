@@ -132,7 +132,7 @@ function Mapmodules() {
         ))}
 
         {/* Render Main Route Polyline */}
-        {route.length > 0 && <Polyline positions={route} color="blue" />}
+        {/* {route.length > 0 && <Polyline positions={route} color="blue" />} */}
 
         {/* Render Step-by-Step Polylines */}
         {stepPolylines.map((step, index) => (
