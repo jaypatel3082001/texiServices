@@ -10,6 +10,9 @@ export default {
         'custom-dark': '#1F1F1F', // Add custom blue
 
       },
+      screens:{
+        'xl':"1312px"
+      }
 
     },
   },

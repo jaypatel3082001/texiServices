@@ -104,7 +104,7 @@ function Mapmodules() {
   return (validDistance >100 ? (
     <div className=" w-full h-screen flex justify-center items-center">
     <div className="text-6xl font-bold text-black bg-white">
-      Invalid Locations! Please Enter Valid Location
+      Invalid Locations! <br/> Please Enter Valid Location
     </div>
 
 

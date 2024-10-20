@@ -152,8 +152,8 @@ function Popbox() {
           <div className='text-xl font-bold'>Loading...</div>
           </div>
         ) : (
-        <div className='w-full h-screen absolute top-0 flex'>
-            <div className='w-full flex justify-start items-start mt-0'>
+        <div className='w-full md:h-screen md:absolute mad:top-0 flex'>
+            <div className='w-full flex md:justify-start md:items-start max-md:justify-center mt-0 max-md:bg-[#E2E4E8] max-md:py-10'>
                 <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-3 w-[350px] h-screen max-w-[350px]:">
                     <div className="space-y-4">
                         <div className="flex flex-col">

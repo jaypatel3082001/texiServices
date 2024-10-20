@@ -93,13 +93,13 @@ function ContactUs() {
           {/* Phone Info */}
           <div className="flex items-center space-x-4 bg-purple-50 p-6 rounded-lg shadow-sm">
             <PhnSvg className="w-8 h-8 text-purple-600" />
-            <p className="text-lg font-medium text-gray-700">+61 2 1234 5678</p>
+            <p className="text-lg font-medium text-gray-700">0479 121 833</p>
           </div>
 
           {/* Email Info */}
           <div className="flex items-center space-x-4 bg-blue-50 p-6 rounded-lg shadow-sm">
             <EmailSvg className="w-8 h-8 text-blue-600" />
-            <p className="text-lg font-medium text-gray-700">info@example.com</p>
+            <p className="text-lg font-medium text-gray-700">booktaxi2312@gmail.com</p>
           </div>
         </div>
       </div>
