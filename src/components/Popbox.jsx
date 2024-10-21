@@ -159,7 +159,7 @@ function Popbox() {
         Isloding ? (
           <div className="absolute w-full h-screen top-0 flex justify-center items-center bg-white z-30">
             {/* You can customize your loading spinner here */}
-          <div className='text-xl font-bold'>Loading...</div>
+          <div className='text-xl font-bold'>Thank you for contacting us😀! our team will soon contact you👍</div>
 
           </div>
         ) : (

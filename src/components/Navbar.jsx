@@ -11,20 +11,23 @@ function Navbar() {
     };
     console.log("isOpen",isOpen)
     return (
-        <div className='flex w-full bg-[#212529] text-[#FFC107] justify-center'>
+        <div className='flex flex-col w-full bg-white  text-[#FFC107] justify-center'>
+          <div className='flex justify-center bg-[#F8F8F8] font-bold text-xl text-black py-3'>Welcome to bookTaxi Call Us: 0479 121 833</div>
+          <div className="flex justify-center">
+
             <div className='flex py-4 justify-between xl:min-w-[1312px] max-xl:w-full max-xl:px-4'>
-                <div>TaxiLogo</div>
+                <div className='font-bold'>TaxiLogo</div>
                 <div className='max-[525px]:hidden'>
                     <ul className='flex'>
-                        <li className='mx-4 hover:text-[#28A745]'>
+                        <li className='mx-4 hover:text-[#28A745] font-bold'>
                             <Link to="/home">
                                 Home
                             </Link>
                         </li>
 
-                        <li className='mx-4 hover:text-[#28A745]'> <Link to="/about-us">About Us</Link></li>
-                        <li className='mx-4 hover:text-[#28A745]'>   <Link to="/services"> Services</Link></li>
-                        <li className='mx-4 hover:text-[#28A745]'>  <Link to="/contact-us">Contact Us</Link></li>
+                        <li className='mx-4 hover:text-[#28A745] font-bold'> <Link to="/about-us">About Us</Link></li>
+                        <li className='mx-4 hover:text-[#28A745] font-bold'>   <Link to="/services"> Services</Link></li>
+                        <li className='mx-4 hover:text-[#28A745] font-bold'>  <Link to="/contact-us">Contact Us</Link></li>
                     </ul>
                 </div>
                 <div className='hidden max-[525px]:flex max-[525px]:flex-col max-[525px]:justify-center text-[#FFC107]'  onClick={toggleMenu}>
@@ -53,6 +56,7 @@ function Navbar() {
 )}
 
             </div>
+          </div>
         </div>
 
     )

@@ -34,7 +34,7 @@ function Contents() {
 
 <Popbox />
 <Mapmodules />
-<UserCount />
+
     </div>
   )
 }

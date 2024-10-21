@@ -45,25 +45,31 @@ function UserCount() {
         <div className="text-5xl text-black">Loading...</div>
       </div>
     ) : (
-      <div className="relative bg-[#FFC107] text-white">
-        {/* Checkered Stripe */}
-        <div className="checkered-stripe h-6 w-full"></div>
+      // <div className="relative bg-[#FFC107] text-white">
+      //   {/* Checkered Stripe */}
+      //   <div className="checkered-stripe h-6 w-full"></div>
 
-        <div className="flex justify-center items-center min-h-[220px] py-8">
-          <div className="text-center">
-            <h2 className="text-2xl md:text-4xl font-extrabold tracking-wider uppercase text-black">
-              Visitor Count
-            </h2>
-            <div className="mt-4">
-              <span className="text-2xl md:text-5xl font-bold text-black">
-                {userCount}
-              </span>
-            </div>
-          </div>
-        </div>
+      //   <div className="flex justify-center items-center min-h-[220px] py-8">
+      //     <div className="text-center">
+      //       <h2 className="text-2xl md:text-4xl font-extrabold tracking-wider uppercase text-black">
+      //         Visitor Count
+      //       </h2>
+      //       <div className="mt-4">
+      //         <span className="text-2xl md:text-5xl font-bold text-black">
+      //           {userCount}
+      //         </span>
+      //       </div>
+      //     </div>
+      //   </div>
 
-        {/* Checkered Stripe */}
-        <div className="checkered-stripe h-6 w-full"></div>
+      //   {/* Checkered Stripe */}
+      //   <div className="checkered-stripe h-6 w-full"></div>
+      // </div>
+      <div>
+      <div className='text-2xl font-bold'>
+          Visitor Count : {userCount}
+
+      </div>
       </div>
     )
   );

@@ -12,6 +12,7 @@ import Contents from './components/Contents';
 import AboutUs from './components/AboutUs';
 import ContactUs from './components/ContactUs';
 import Services from './components/Services';
+import UserCount from './components/UserCount';
 
 function App() {
   const [count, setCount] = useState(0);
