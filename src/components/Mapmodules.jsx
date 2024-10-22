@@ -81,8 +81,9 @@ function Mapmodules() {
 
         // Dispatch actions to update Redux state
         setValidDistance(distance/1000)
-        dispatch(setTotalDistance(distance / 1000)); // in kilometers
-        dispatch(setTotalDuration(duration/60)); // in seconds
+        dispatch(setTotalDistance(parseFloat((distance / 1000).toFixed(2)))); // in kilometers
+        dispatch(setTotalDuration(parseFloat((duration / 60).toFixed(2))));
+
 
         // Set the map center to the pickup location
         setMapCenter([pickUp.lat, pickUp.lng]);

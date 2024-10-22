@@ -17,6 +17,8 @@ function Popbox() {
     const [pickupInput, setPickupInput] = useState('');
     const [Isloding, setIsloding] = useState(false);
     const [dropoffInput, setDropoffInput] = useState('');
+    const [time, setTime] = useState('00:00');
+    const [date, setDate] = useState('');
     const [totalDuration, setTotalDuration] = useState(inputs?.totalDuration);
     const [totalDistance, setTotalDistance] = useState(inputs?.totalDistance);
     const [name, setName] = useState('');
@@ -121,6 +123,8 @@ function Popbox() {
             destination: pickupInput,
             totalDistance: totalDistance,
             passengerCount: passengerCount,
+            time: time,
+            date: date,
         };
 
         console.log(data, "data");
@@ -154,7 +158,7 @@ function Popbox() {
         }
     };
 
-
+console.log('time',time)
     return (
         Isloding ? (
           <div className="absolute w-full h-screen top-0 flex justify-center items-center bg-white z-30">
@@ -165,187 +169,216 @@ function Popbox() {
         ) : (
         <div className='w-full md:h-screen md:absolute mad:top-0 flex'>
           {/* <ToastContainer /> */}
-            <div className='w-full flex md:justify-start md:items-start max-md:justify-center mt-0 max-md:bg-[#E2E4E8] max-md:py-10'>
-                <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-3 w-[350px] h-screen max-w-[350px]:">
-                <form onSubmit={handleSubmit}>
-                    <div className="space-y-4">
-                        <div className="flex flex-col">
-                            <label htmlFor="name" className="text-gray-700 font-medium">Name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={name}
-                                className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                            />
-                        </div>
+          <div className="w-full flex md:justify-start md:items-start max-md:justify-center mt-0 max-md:bg-[#E2E4E8] max-md:py-10">
+  <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-3 w-[350px] h-screen max-w-[350px]">
+    <form onSubmit={handleSubmit}>
+      <div className="space-y-4">
+        
+        {/* Name Input */}
+        <div className="flex flex-col">
+          <label htmlFor="name" className="text-gray-700 font-medium">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
 
-                        <div className="flex flex-col">
-                            <label htmlFor="phone" className="text-gray-700 font-medium">Contact Number</label>
-                            <input
-                                type="number"
-                                name="phone"
-                                value={contactNum}
-                                className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                                onChange={(e) => setContactNum(e.target.value)}
-                                required
-                            />
-                        </div>
+        {/* Contact Number */}
+        <div className="flex flex-col">
+          <label htmlFor="phone" className="text-gray-700 font-medium">Contact Number</label>
+          <input
+            type="number"
+            name="phone"
+            value={contactNum}
+            className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+            onChange={(e) => setContactNum(e.target.value)}
+            required
+          />
+        </div>
 
-                        <div className="flex flex-col">
-                            <label htmlFor="pickUp" className="text-gray-700 font-medium">Pick-Up Point</label>
-                            <input
-                                type="text"
-                                name="pickUp"
-                                value={pickupInput}
-                                className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                                onChange={handlePickupChange}
-                                required
-                            />
-                            {/* Render autocomplete suggestions */}
-                            {autocompletePickup.length > 0 && autocompletebox === true && (
-                                <ul className="border border-gray-300 rounded-md mt-1 max-h-40 overflow-auto">
-                                    {autocompletePickup.map((suggestion, index) => (
-                                        <li
-                                            key={index}
-                                            className="p-2 hover:bg-gray-200 cursor-pointer"
-                                            onClick={() => handlePlaceChanged('pickup', suggestion)}
-                                        >
-                                            {suggestion.display_name}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
+        {/* Pick-Up Point with Autocomplete */}
+        <div className="flex flex-col">
+          <label htmlFor="pickUp" className="text-gray-700 font-medium">Pick-Up Point</label>
+          <input
+            type="text"
+            name="pickUp"
+            value={pickupInput}
+            className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+            onChange={handlePickupChange}
+            required
+          />
+          {autocompletePickup.length > 0 && autocompletebox && (
+            <ul className="border border-gray-300 rounded-md mt-1 max-h-40 overflow-auto">
+              {autocompletePickup.map((suggestion, index) => (
+                <li
+                  key={index}
+                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => handlePlaceChanged('pickup', suggestion)}
+                >
+                  {suggestion.display_name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-                        <div className="flex flex-col">
-                            <label htmlFor="dropOff" className="text-gray-700 font-medium">Drop-Off Point</label>
-                            <input
-                                type="text"
-                                name="dropOff"
-                                value={dropoffInput}
-                                className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                                onChange={handleDropoffChange}
-                                required
-                            />
-                            {/* Render autocomplete suggestions */}
-                            {autocompleteDropoff.length > 0 && (
-                                <ul className="border border-gray-300 rounded-md mt-1 max-h-40 overflow-auto">
-                                    {autocompleteDropoff?.map((suggestion, index) => (
-                                        <li
-                                            key={index}
-                                            className="p-2 hover:bg-gray-200 cursor-pointer"
-                                            onClick={() => handlePlaceChanged('dropoff', suggestion)}
-                                        >
-                                            {suggestion.display_name}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
+        {/* Drop-Off Point with Autocomplete */}
+        <div className="flex flex-col">
+          <label htmlFor="dropOff" className="text-gray-700 font-medium">Drop-Off Point</label>
+          <input
+            type="text"
+            name="dropOff"
+            value={dropoffInput}
+            className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+            onChange={handleDropoffChange}
+            required
+          />
+          {autocompleteDropoff.length > 0 && (
+            <ul className="border border-gray-300 rounded-md mt-1 max-h-40 overflow-auto">
+              {autocompleteDropoff.map((suggestion, index) => (
+                <li
+                  key={index}
+                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => handlePlaceChanged('dropoff', suggestion)}
+                >
+                  {suggestion.display_name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-                        {totalDistance && totalDuration && (<div className="space-y-4">
-                            <div className="flex flex-col">
-                                <div>Distance : {totalDistance} Km</div>
-                                <div>Approximately Time : {totalDuration} Min</div>
-                            </div>
-                        </div>
-                        )}
-
-                        <div className="space-y-4">
-                        <div className="flex flex-col">
-                            <label htmlFor="paaasengerCount" className="text-gray-700 font-medium">Number of Passenger</label>
-                            <input
-                                type="text"
-                                name="paaasengerCount"
-                                value={passengerCount}
-                                className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
-                                onChange={(e) => setPassengerCount(e.target.value)}
-                                required
-                            />
-                        </div>
-                {/* Special Options */}
-                <div className="flex flex-col">
-                    <label htmlFor="specialOption" className="text-gray-700 font-medium">Special Options</label>
-                    <div className="flex mt-1">
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                name="disabledAccess"
-                                checked={disabledAccess}
-                                onChange={(e) => setDisabledAccess(e.target.checked)}
-                                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                            />
-                            <label className="ml-2 text-gray-700">Disabled</label>
-                        </div>
-                        <div className="flex items-center ml-4">
-                            <input
-                                type="checkbox"
-                                name="childAvailability"
-                                checked={childAvailability}
-                                onChange={(e) => setChildAvailability(e.target.checked)}
-                                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                            />
-                            <label className="ml-2 text-gray-700">Child seat</label>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Payment Mode */}
-                <div className="flex flex-col">
-                    <label htmlFor="paymentMode" className="text-gray-700 font-medium">Payment Mode</label>
-                    <div className="flex space-y-0 mt-1 items-center">
-                        <div className="flex items-center">
-                            <input
-                                type="radio"
-                                name="paymentMode"
-                                value="Cash"
-                                checked={paymentMode === 'Cash'}
-                                onChange={(e) => setPaymentMode(e.target.value)}
-                                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
-                            />
-                            <label className="ml-2 text-gray-700">Cash</label>
-                        </div>
-                        <div className="flex items-center mx-3">
-                            <input
-                                type="radio"
-                                name="paymentMode"
-                                value="Card"
-                                checked={paymentMode === 'Card'}
-                                onChange={(e) => setPaymentMode(e.target.value)}
-                                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
-                            />
-                            <label className="ml-2 text-gray-700">Card</label>
-                        </div>
-                        <div className="flex items-center">
-                            <input
-                                type="radio"
-                                name="paymentMode"
-                                value="Cab Charge"
-                                checked={paymentMode === 'Cab Charge'}
-                                onChange={(e) => setPaymentMode(e.target.value)}
-                                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
-                            />
-                            <label className="ml-2 text-gray-700">Cab Charge</label>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Submit Button */}
-                <div className="flex justify-start">
-                        <button
-                            type="submit" // Change button type to submit
-                            className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition"
-                        >
-                            Submit
-                        </button>
-                    </div>
+        {/* Distance and Duration */}
+        {totalDistance && totalDuration && (
+          <div className="space-y-4">
+            <div className="flex flex-col">
+              <div>Distance: {totalDistance} Km</div>
+              <div>Approximately Time: {totalDuration} Min</div>
             </div>
-                    </div>
-                    </form>
-                </div>
+          </div>
+        )}
+
+        {/* Passenger Count */}
+        <div className="flex flex-col">
+          <label htmlFor="paaasengerCount" className="text-gray-700 font-medium">Number of Passengers</label>
+          <input
+            type="text"
+            name="paaasengerCount"
+            value={passengerCount}
+            className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+            onChange={(e) => setPassengerCount(e.target.value)}
+            required
+          />
+        </div>
+
+        {/* Date & Time */}
+        <div className="flex flex-col">
+          <label htmlFor="dateTime" className="text-gray-700 font-medium">Select Date & Time</label>
+          <div className="flex space-x-2">
+            <input
+              type="date"
+              name="date"
+              value={date}
+              className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+            <input
+              type="time"
+              name="time"
+              value={time}
+              className="mt-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
+              onChange={(e) => setTime(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
+        {/* Special Options */}
+        <div className="flex flex-col">
+          <label htmlFor="specialOption" className="text-gray-700 font-medium">Special Options</label>
+          <div className="flex mt-1">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="disabledAccess"
+                checked={disabledAccess}
+                onChange={(e) => setDisabledAccess(e.target.checked)}
+                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label className="ml-2 text-gray-700">Disabled</label>
             </div>
+            <div className="flex items-center ml-4">
+              <input
+                type="checkbox"
+                name="childAvailability"
+                checked={childAvailability}
+                onChange={(e) => setChildAvailability(e.target.checked)}
+                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label className="ml-2 text-gray-700">Child seat</label>
+            </div>
+          </div>
+        </div>
+
+        {/* Payment Mode */}
+        <div className="flex flex-col">
+          <label htmlFor="paymentMode" className="text-gray-700 font-medium">Payment Mode</label>
+          <div className="flex space-y-0 mt-1 items-center">
+            <div className="flex items-center">
+              <input
+                type="radio"
+                name="paymentMode"
+                value="Cash"
+                checked={paymentMode === 'Cash'}
+                onChange={(e) => setPaymentMode(e.target.value)}
+                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+              />
+              <label className="ml-2 text-gray-700">Cash</label>
+            </div>
+            <div className="flex items-center mx-3">
+              <input
+                type="radio"
+                name="paymentMode"
+                value="Card"
+                checked={paymentMode === 'Card'}
+                onChange={(e) => setPaymentMode(e.target.value)}
+                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+              />
+              <label className="ml-2 text-gray-700">Card</label>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="radio"
+                name="paymentMode"
+                value="Cab Charge"
+                checked={paymentMode === 'Cab Charge'}
+                onChange={(e) => setPaymentMode(e.target.value)}
+                className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+              />
+              <label className="ml-2 text-gray-700">Cab Charge</label>
+            </div>
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <div className="flex justify-start">
+          <button
+            type="submit"
+            className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
         </div>
 
 
