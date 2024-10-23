@@ -111,7 +111,7 @@ function Mapmodules() {
 
     </div>
   ) :(
-    <div className="w-full h-screen z-10 max-md:px-4">
+    <div className="w-full h-screen z-10 max-md:px-4 max-md:py-6 rounded-sm shadow-md">
       <MapContainer
         center={mapCenter}
         zoom={13}

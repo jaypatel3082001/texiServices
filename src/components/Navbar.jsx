@@ -15,8 +15,14 @@ function Navbar() {
           <div className='flex justify-center bg-[#F8F8F8] font-bold text-xl text-black py-3'>Welcome to bookTaxi Call Us: 0479 121 833</div>
           <div className="flex justify-center">
 
-            <div className='flex py-4 justify-between xl:min-w-[1312px] max-xl:w-full max-xl:px-4'>
-                <div className='font-bold'>TaxiLogo</div>
+            <div className='flex py-4 justify-between items-center xl:min-w-[1312px] max-xl:w-full max-xl:px-4'>
+                <div className='font-bold'>
+                  <div className='flex justify-center'>
+
+                  <img src="/texi-logo.png" alt="logo" className='h-[40px] w-[40px] object-fit rounded-full'/>
+                  </div>
+                <span>bookTaxi</span>
+                </div>
                 <div className='max-[525px]:hidden'>
                     <ul className='flex'>
                         <li className='mx-4 hover:text-[#28A745] font-bold'>
