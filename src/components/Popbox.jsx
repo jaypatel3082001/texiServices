@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDropup, setPickUp } from '../reduxFiles/inputSlice';
+import { setDropup, setPickUp, setLoading, setData } from '../reduxFiles/inputSlice';
 // import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,7 @@ function Popbox() {
     const [dropoffInput, setDropoffInput] = useState('');
     const [time, setTime] = useState('00:00');
     const [date, setDate] = useState('');
+    // const [data, setData] = useState();
     const [totalDuration, setTotalDuration] = useState(inputs?.totalDuration);
     const [totalDistance, setTotalDistance] = useState(inputs?.totalDistance);
     const [name, setName] = useState('');
@@ -113,6 +114,7 @@ function Popbox() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setIsloding(true);
+        dispatch(setLoading(true))
         const data = {
             name: name,
             contactNum: contactNum,
@@ -129,6 +131,8 @@ function Popbox() {
 
         console.log(data, "data");
         const apiUrl = import.meta.env.VITE_BACKEND_LINK;
+        // setData(data)
+        dispatch(setData(data))
 
         try {
             const response = await fetch(`${apiUrl}/user/email`, {
@@ -146,6 +150,7 @@ function Popbox() {
             const responseData = await response.json();
             console.log(responseData);
 
+
             // Show success toast
             toast.success("Form submitted successfully!");
         } catch (error) {
@@ -154,26 +159,23 @@ function Popbox() {
             // Show error toast
             toast.error("There was an error submitting the form.");
         } finally {
-            setIsloding(false);
+            // setIsloding(false);
         }
     };
 
-console.log('time',time)
+// console.log('data',data)
     return (
-        Isloding ? (
-          <div className="absolute w-full h-screen top-0 flex justify-center items-center bg-white z-30">
-            {/* You can customize your loading spinner here */}
-          <div className='text-xl font-bold'>Thank you for contacting us😀! our team will soon contact you👍</div>
+        // Isloding ? (
 
-          </div>
-        ) : (
+
+        // ) : (
         <div className='w-full md:h-screen md:absolute mad:top-0 flex'>
           {/* <ToastContainer /> */}
           <div className="w-full flex md:justify-start md:items-start max-md:justify-center mt-0 max-md:bg-[#E2E4E8] max-md:py-10">
   <div className="bg-white shadow-lg rounded-md z-20 p-6 space-y-3 w-[350px] h-screen max-w-[350px]">
     <form onSubmit={handleSubmit}>
       <div className="space-y-4">
-        
+
         {/* Name Input */}
         <div className="flex flex-col">
           <label htmlFor="name" className="text-gray-700 font-medium">Name</label>
@@ -383,7 +385,7 @@ console.log('time',time)
 
 
 
-    )
+    // )
     )
     // return (
     //     {Isloading ? (

@@ -1,12 +1,12 @@
 import React from 'react'
 
 const services = [
-  { title: 'Business Transfer', description: 'Enjoy seamless transportation tailored for corporate clients. Our professional drivers ensure timely pickups and drop-offs, allowing you to focus on your business while we take care of your travel needs.', imgSrc: 'services1.jpg' },
-  { title: 'Online Booking', description: 'Experience the convenience of our user-friendly online booking system. Reserve your taxi anytime, anywhere, with just a few clicks. Our platform allows you to schedule rides in advance, providing you with peace of mind.', imgSrc: 'services1.jpg' },
-  { title: 'City Transport', description: "Navigate Sydney with ease using our city transport services. Whether you're commuting to work or exploring local attractions, our reliable taxis are always ready to take you wherever you need to go.", imgSrc: 'services1.jpg' },
-  { title: 'Airport Transfer', description: 'Travel to and from Sydney Airport with confidence. Our airport transfer service guarantees punctuality and comfort, ensuring that you arrive at your destination relaxed and on time.', imgSrc: 'services1.jpg' },
-  { title: 'Address Pickup', description: 'We offer flexible address pickup options to suit your schedule. Simply provide your location, and our drivers will be there promptly to assist you, making your journey as convenient as possible.', imgSrc: 'services1.jpg' },
-  { title: 'Taxi Tours', description: "Discover the beauty of Sydney with our tailored taxi tours. Whether you're a tourist or a local, our experienced drivers can guide you to iconic landmarks and hidden gems, providing a personalized sightseeing experience.", imgSrc: 'services1.jpg' }
+  { title: 'Business Transfer', description: 'Enjoy seamless transportation tailored for corporate clients. Our professional drivers ensure timely pickups and drop-offs, allowing you to focus on your business while we take care of your travel needs.', imgSrc: 'Business_Transfer.png' },
+  { title: 'Online Booking', description: 'Experience the convenience of our user-friendly online booking system. Reserve your taxi anytime, anywhere, with just a few clicks. Our platform allows you to schedule rides in advance, providing you with peace of mind.', imgSrc: 'Online_Booking.png' },
+  { title: 'City Transport', description: "Navigate Sydney with ease using our city transport services. Whether you're commuting to work or exploring local attractions, our reliable taxis are always ready to take you wherever you need to go.", imgSrc: 'City_Transport.png' },
+  { title: 'Airport Transfer', description: 'Travel to and from Sydney Airport with confidence. Our airport transfer service guarantees punctuality and comfort, ensuring that you arrive at your destination relaxed and on time.', imgSrc: 'Airport_Transfer.png' },
+  { title: 'Address Pickup', description: 'We offer flexible address pickup options to suit your schedule. Simply provide your location, and our drivers will be there promptly to assist you, making your journey as convenient as possible.', imgSrc: 'Address_Pickup.png' },
+  { title: 'Taxi Tours', description: "Discover the beauty of Sydney with our tailored taxi tours. Whether you're a tourist or a local, our experienced drivers can guide you to iconic landmarks and hidden gems, providing a personalized sightseeing experience.", imgSrc: 'Taxi_Tours.png' }
 ];
 const ServiceCard = ({ title, description, imgSrc }) => (
   <div className="flex flex-col items-center text-center">

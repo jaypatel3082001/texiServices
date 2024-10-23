@@ -12,7 +12,7 @@ function Navbar() {
     console.log("isOpen",isOpen)
     return (
         <div className='flex flex-col w-full bg-white  text-[#FFC107] justify-center'>
-          <div className='flex justify-center bg-[#F8F8F8] font-bold text-xl text-black py-3'>Welcome to bookTaxi Call Us: 0479 121 833</div>
+          <div className='flex justify-center bg-[#F8F8F8] font-bold text-xl text-black py-3'>Welcome to BookTaxi Call Us: 0479 121 833</div>
           <div className="flex justify-center">
 
             <div className='flex py-4 justify-between items-center xl:min-w-[1312px] max-xl:w-full max-xl:px-4'>
@@ -21,7 +21,7 @@ function Navbar() {
 
                   <img src="/texi-logo.png" alt="logo" className='h-[40px] w-[40px] object-fit rounded-full'/>
                   </div>
-                <span>bookTaxi</span>
+                <span>BookTaxi</span>
                 </div>
                 <div className='max-[525px]:hidden'>
                     <ul className='flex'>
