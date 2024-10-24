@@ -12,7 +12,10 @@ export default {
       },
       screens:{
         'xl':"1312px"
-      }
+      },
+      fontFamily: {
+        kaushan: ['Kaushan Script', 'cursive'],
+      },
 
     },
   },
